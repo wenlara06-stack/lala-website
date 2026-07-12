@@ -8,12 +8,27 @@
     {
       "id": "testi-earthquake",
       "photo": "/images/testimonials/testi-earthquake.jpg",
-      "quote": "謝謝您陪我到好晚，最後還一起研究地震險。"
+      "quote": "謝謝你陪我這麼晚！以後阿姨家裡就交給你了。"
     },
     {
       "id": "testi-selfie",
       "photo": "/images/testimonials/testi-selfie.jpg",
       "quote": "希望妳事業蒸蒸日上，業績長紅。"
+    },
+    {
+      "id": "testi-confident",
+      "photo": "/images/testimonials/testi-confident.jpg",
+      "quote": "業務員如果是妳，我百分百安心，太優秀。"
+    },
+    {
+      "id": "testi-hanna",
+      "photo": "/images/testimonials/testi-hanna.jpg",
+      "quote": "買保險找我閨蜜業務拉！她很專業！"
+    },
+    {
+      "id": "testi-trust",
+      "photo": "/images/testimonials/testi-trust.jpg",
+      "quote": "我爸媽對你很放心信任！謝謝幫我們處理家裡的理財跟傳承。"
     }
   ]
 }

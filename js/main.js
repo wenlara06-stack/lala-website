@@ -36,7 +36,7 @@ function renderTestimonials(containerId) {
   el.innerHTML = TESTIMONIALS.map(
     (t) => `
     <div class="testimonial-item">
-      <span class="testimonial-photo" style="background-image:url('${t.photo}')"></span>
+      <span class="testimonial-avatar" style="background-image:url('${t.photo}')"></span>
       <p class="testimonial-quote">「${t.quote}」</p>
     </div>`
   ).join("");
@@ -171,7 +171,7 @@ function renderCategoryGrid(containerId) {
 /* ---------- 文章卡片 HTML ---------- */
 function articleCardHtml(article) {
   const cat = getCategoryBySlug(article.category);
-  const cover = article.cover || (cat ? cat.banner : "");
+  const cover = cat ? cat.banner : "";
   const shortBadge = article.format === "short" ? `<span class="short-badge-inline">短篇</span>` : "";
   return `
     <a class="article-card" href="article.html?id=${article.id}">
@@ -334,10 +334,10 @@ function initArticlePage() {
           ${shareBarHtml(article.title)}
         </div>
         <div class="short-story-layout">
-          ${sideImg ? `<span class="short-side-image" style="background-image:url('${sideImg}')"></span>` : ""}
           <div class="article-body short-story-body">
             ${typeof marked !== "undefined" ? marked.parse(article.content) : article.content}
           </div>
+          ${sideImg ? `<span class="short-side-image" style="background-image:url('${sideImg}')"></span>` : ""}
         </div>
         <div class="short-story-cta">
           <a class="btn btn-primary" href="https://line.me/ti/p/OS92ei6lpr" target="_blank" rel="noopener">LINE 預約諮詢</a>
@@ -426,24 +426,27 @@ function loadInstagramEmbed() {
 }
 
 /* ---------- 首頁：客戶故事輪播（短篇故事） ---------- */
+const STORY_TINTS = ["#3E2C23", "#5F5147", "#7A6A5A", "#8C6B4F", "#6B5849", "#9C8A78"];
+
 function renderStoryCarousel(containerId) {
   const el = document.getElementById(containerId);
   if (!el) return;
   const stories = ARTICLES.filter((a) => a.format === "short" && !a.draft);
   if (stories.length === 0) return;
   el.innerHTML = stories
-    .map((s) => {
+    .map((s, i) => {
       const cat = getCategoryBySlug(s.category);
-      const thumb = cat ? cat.banner : "";
+      const tint = STORY_TINTS[i % STORY_TINTS.length];
       return `
       <a class="story-card" href="article.html?id=${s.id}">
-        <span class="story-thumb" style="background-image:url('${thumb}')"></span>
-        <span class="story-body">
-          <span class="story-cat">${cat ? cat.name : ""}</span>
-          <span class="story-title-row">
+        <span class="story-thumb" style="background-color:${tint}">
+          <span class="story-thumb-inner">
             <span class="story-title">${s.title}</span>
             <span class="story-short-badge">短篇</span>
           </span>
+        </span>
+        <span class="story-body">
+          <span class="story-cat">${cat ? cat.name : ""}</span>
           <span class="story-excerpt">${s.excerpt}</span>
         </span>
       </a>`;
