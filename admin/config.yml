@@ -1,0 +1,59 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# 圖片上傳後會放在這個資料夾
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+# 存檔後直接發布，不需要額外審核流程（適合個人網站）
+publish_mode: simple
+
+collections:
+  - name: "articles"
+    label: "📝 文章"
+    files:
+      - name: "articles"
+        label: "所有文章"
+        file: "data/articles.json"
+        fields:
+          - label: "文章列表"
+            name: "articles"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "編號（id）", name: "id", widget: "string", hint: "英文或數字，不要跟其他篇重複，例如 article-011" }
+              - { label: "標題", name: "title", widget: "string" }
+              - label: "分類"
+                name: "category"
+                widget: "select"
+                options:
+                  - { label: "學著把錢想清楚（理財規劃）", value: "money" }
+                  - { label: "把愛好好留下來（世代傳承）", value: "love" }
+                  - { label: "學著從容過日子（優雅生活）", value: "grace" }
+                  - { label: "照著想要的方式老去（退休安養）", value: "aging" }
+                  - { label: "學著照顧自己（客戶理賠）", value: "care" }
+              - { label: "發布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "預估閱讀時間", name: "readTime", widget: "string", required: false, hint: "例如：6 分鐘" }
+              - { label: "摘要（顯示在列表卡片上）", name: "excerpt", widget: "text" }
+              - { label: "封面圖", name: "cover", widget: "image", required: false }
+              - { label: "內文", name: "content", widget: "markdown" }
+              - { label: "還是草稿（先不要正式顯示）", name: "draft", widget: "boolean", required: false, default: false }
+
+  - name: "categories"
+    label: "🗂 五個分類設定"
+    files:
+      - name: "categories"
+        label: "分類清單"
+        file: "data/categories.json"
+        fields:
+          - label: "分類"
+            name: "categories"
+            widget: "list"
+            summary: "{{name}}"
+            fields:
+              - { label: "代碼（slug，不要改動既有的）", name: "slug", widget: "string" }
+              - { label: "分類名稱", name: "name", widget: "string" }
+              - { label: "副標題", name: "subtitle", widget: "string" }
+              - { label: "icon（保留欄位，可留空）", name: "icon", widget: "string", required: false }
+              - { label: "分類封面圖", name: "banner", widget: "image", required: false }

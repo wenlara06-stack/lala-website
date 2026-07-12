@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文章｜余玟萱 拉拉</title>
+<meta name="description" content="學著把錢想清楚、把愛好好留下來、學著從容過日子、照著想要的方式老去、學著照顧自己。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand-mark">余玟萱<span>拉拉</span></a>
+    <nav class="nav-desktop">
+      <div class="nav-links">
+        <a href="index.html">首頁</a>
+        <a href="about.html">關於我</a>
+        <a href="articles.html" class="active">文章</a>
+      </div>
+      <div class="nav-tools">
+        <button class="search-toggle-btn" id="searchToggle" aria-label="搜尋">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a class="btn-line" href="https://line.me/R/ti/p/@yourlineid" target="_blank" rel="noopener">預約諮詢</a>
+      </div>
+    </nav>
+    <button class="menu-toggle-btn" id="menuToggle" aria-label="選單">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="search-bar" id="searchBar">
+  <div class="wrap">
+    <input type="text" id="headerSearchInput" placeholder="搜尋文章關鍵字，按 Enter 搜尋…">
+  </div>
+</div>
+
+<nav class="nav-mobile-panel" id="mobileNav">
+  <a href="index.html">首頁</a>
+  <a href="about.html">關於我</a>
+  <a href="articles.html">文章</a>
+  <a href="https://line.me/R/ti/p/@yourlineid" target="_blank" rel="noopener">預約諮詢</a>
+</nav>
+
+<section class="page-banner">
+  <div class="wrap">
+    <p class="section-eyebrow">ARTICLES</p>
+    <h1>把人生的每一塊，慢慢想清楚</h1>
+    <p>五個主題，陪你把理財、傳承、生活、老後與自我照顧，一件一件想過一遍。</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div style="max-width:420px; margin: 0 auto var(--space-md);">
+      <input type="text" id="pageSearchInput" placeholder="搜尋文章標題或內文…"
+        style="width:100%; padding:12px 16px; border:1px solid var(--color-line); border-radius:100px; background:var(--color-bg-card); font-family:var(--font-sans); font-size:0.95rem; color:var(--color-brown);">
+    </div>
+    <div class="filter-bar" id="filterBar"></div>
+
+    <div class="article-list" id="articleList"></div>
+
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <span class="icon">🍵</span>
+      <p>還沒有符合的文章，換個關鍵字或分類試試看。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 電子報訂閱 ========== -->
+<section class="newsletter-section">
+  <div class="wrap newsletter-box">
+    <div>
+      <h3>訂閱拉拉的文字</h3>
+      <p>把「學著把錢想清楚」的思考，定期寄到你的信箱，不定期更新，不打擾。</p>
+    </div>
+    <form action="https://YOUR-ACCOUNT.usX.list-manage.com/subscribe/post?u=YOUR_U&amp;id=YOUR_ID" method="post" target="_blank" class="newsletter-form">
+      <input type="email" name="EMAIL" placeholder="輸入你的 email" required>
+      <button type="submit" class="btn btn-primary">訂閱</button>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h5>余玟萱 拉拉</h5>
+        <p>人生想通了，財務自然有答案。<br>陪你把人生和財務都想清楚的財務顧問。</p>
+      </div>
+      <div>
+        <h5 style="font-size:1rem;">導覽</h5>
+        <p><a href="index.html">首頁</a></p>
+        <p><a href="about.html">關於我</a></p>
+        <p><a href="articles.html">文章</a></p>
+      </div>
+      <div>
+        <h5 style="font-size:1rem;">聯絡</h5>
+        <p><a href="https://line.me/R/ti/p/@yourlineid" target="_blank" rel="noopener">LINE 預約諮詢</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 余玟萱 拉拉．All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  loadSiteData().then(initArticlesPage);
+</script>
+</body>
+</html>
