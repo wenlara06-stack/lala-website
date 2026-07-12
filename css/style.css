@@ -876,7 +876,7 @@ h1, h2, h3, h4 {
   align-items: center;
 }
 .lifestyle-photo {
-  max-width: 360px;
+  max-width: 340px;
   margin-left: auto;
   border-radius: 6px;
   overflow: hidden;
@@ -921,7 +921,7 @@ h1, h2, h3, h4 {
   margin-bottom: var(--space-xs);
   display: block;
 }
-.about-intro p { margin-bottom: var(--space-sm); color: var(--color-brown-soft); }
+.about-intro p { margin-bottom: var(--space-sm); color: var(--color-brown-soft); max-width: 560px; }
 .about-intro p strong { color: var(--color-brown); font-weight: 600; }
 
 .about-section { padding: var(--space-lg) 0; border-top: 1px solid var(--color-line); }
@@ -1487,7 +1487,7 @@ h1, h2, h3, h4 {
   .about-hero { grid-template-columns: 1fr; }
   .about-photo { max-width: 320px; margin: 0 auto; }
   .lifestyle-grid { grid-template-columns: 1fr; }
-  .lifestyle-grid .lifestyle-photo { order: -1; max-width: 360px; margin: 0 auto; }
+  .lifestyle-grid .lifestyle-photo { order: -1; max-width: 340px; margin: 0 auto; }
   .honor-grid, .service-grid { grid-template-columns: 1fr; }
   .honors-layout { grid-template-columns: 1fr; }
   .honor-photos { max-width: 230px; margin: var(--space-md) auto 0; flex-direction: column; }
