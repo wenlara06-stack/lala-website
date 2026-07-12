@@ -351,7 +351,7 @@ h1, h2, h3, h4 {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-sm);
   margin-top: var(--space-md);
 }
@@ -472,38 +472,39 @@ h1, h2, h3, h4 {
 .story-card .story-thumb {
   aspect-ratio: 16 / 10;
   display: flex;
-  align-items: flex-end;
-}
-.story-thumb-inner {
-  width: 100%;
-  padding: 14px 16px;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 24px;
+  text-align: center;
 }
 .story-card .story-title {
   font-family: var(--font-serif);
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #F7F2EA;
-  line-height: 1.5;
+  line-height: 1.6;
+}
+.story-card .story-body { padding: 24px 28px 26px; }
+.story-body-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 6px;
+  padding-right: 6px;
 }
 .story-short-badge {
   flex-shrink: 0;
   font-size: 0.62rem;
-  color: #F7F2EA;
-  border: 1px solid rgba(247, 242, 234, 0.5);
+  color: var(--color-milktea-deep);
+  border: 1px solid var(--color-line);
   padding: 2px 7px;
   border-radius: 100px;
   white-space: nowrap;
-  margin-left: 6px;
 }
-.story-card .story-body { padding: 12px 14px 14px; }
 .story-card .story-cat {
   font-size: 0.7rem;
   color: var(--color-milktea-deep);
   letter-spacing: 0.04em;
-  margin-bottom: 6px;
   display: block;
 }
 .story-card .story-excerpt {
@@ -905,7 +906,7 @@ h1, h2, h3, h4 {
 }
 
 .about-intro h1 {
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-size: 1.5rem;
   margin-bottom: var(--space-sm);
 }
 .about-intro .about-role {

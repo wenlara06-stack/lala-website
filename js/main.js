@@ -171,7 +171,7 @@ function renderCategoryGrid(containerId) {
 /* ---------- 文章卡片 HTML ---------- */
 function articleCardHtml(article) {
   const cat = getCategoryBySlug(article.category);
-  const cover = cat ? cat.banner : "";
+  const cover = article.format === "short" ? (cat ? cat.banner : "") : (article.cover || (cat ? cat.banner : ""));
   const shortBadge = article.format === "short" ? `<span class="short-badge-inline">短篇</span>` : "";
   return `
     <a class="article-card" href="article.html?id=${article.id}">
@@ -246,7 +246,12 @@ function initArticlesPage() {
       if (!q) return true;
       const haystack = (a.title + " " + a.excerpt + " " + stripHtml(a.content)).toLowerCase();
       return haystack.includes(q);
-    }).sort((a, b) => new Date(b.date) - new Date(a.date));
+    }).sort((a, b) => {
+      const aShort = a.format === "short" ? 1 : 0;
+      const bShort = b.format === "short" ? 1 : 0;
+      if (aShort !== bShort) return aShort - bShort;
+      return new Date(b.date) - new Date(a.date);
+    });
 
     if (filtered.length === 0) {
       listEl.innerHTML = "";
@@ -268,13 +273,16 @@ function shareBarHtml(title) {
   return `
     <div class="share-bar">
       <span class="share-label">分享這篇</span>
-      <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" rel="noopener" aria-label="分享到 Facebook">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg>
-      </a>
       <a class="share-btn" href="https://social-plugins.line.me/lineit/share?url=${url}&text=${text}" target="_blank" rel="noopener" aria-label="分享到 LINE">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
       </a>
       <button class="share-btn share-copy-btn" type="button" aria-label="複製連結（可分享到 IG）" title="複製連結，可貼到 IG 限動或訊息">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+      </button>
+      <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" rel="noopener" aria-label="分享到 Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg>
+      </a>
+      <button class="share-btn share-copy-btn" type="button" aria-label="複製連結" title="複製連結">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
       </button>
       <span class="share-copied-tip" id="shareCopiedTip">連結已複製，可貼到 IG 限動或訊息！</span>
@@ -282,19 +290,20 @@ function shareBarHtml(title) {
 }
 
 function initShareBar() {
-  const btn = document.querySelector(".share-copy-btn");
+  const btns = document.querySelectorAll(".share-copy-btn");
   const tip = document.getElementById("shareCopiedTip");
-  if (!btn) return;
-  btn.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      if (tip) {
-        tip.classList.add("show");
-        setTimeout(() => tip.classList.remove("show"), 2200);
+  btns.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        if (tip) {
+          tip.classList.add("show");
+          setTimeout(() => tip.classList.remove("show"), 2200);
+        }
+      } catch (e) {
+        /* 剪貼簿權限被拒絕時，靜默失敗即可 */
       }
-    } catch (e) {
-      /* 剪貼簿權限被拒絕時，靜默失敗即可 */
-    }
+    });
   });
 }
 
@@ -440,13 +449,13 @@ function renderStoryCarousel(containerId) {
       return `
       <a class="story-card" href="article.html?id=${s.id}">
         <span class="story-thumb" style="background-color:${tint}">
-          <span class="story-thumb-inner">
-            <span class="story-title">${s.title}</span>
-            <span class="story-short-badge">短篇</span>
-          </span>
+          <span class="story-title">${s.title}</span>
         </span>
         <span class="story-body">
-          <span class="story-cat">${cat ? cat.name : ""}</span>
+          <span class="story-body-top">
+            <span class="story-cat">${cat ? cat.name : ""}</span>
+            <span class="story-short-badge">短篇</span>
+          </span>
           <span class="story-excerpt">${s.excerpt}</span>
         </span>
       </a>`;
