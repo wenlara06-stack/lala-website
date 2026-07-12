@@ -1,0 +1,19 @@
+{
+  "testimonials": [
+    {
+      "id": "testi-claim",
+      "photo": "/images/testimonials/testi-claim.jpg",
+      "quote": "謝謝拉拉，很有耐心地幫我處理，真的是超棒。"
+    },
+    {
+      "id": "testi-earthquake",
+      "photo": "/images/testimonials/testi-earthquake.jpg",
+      "quote": "謝謝您陪我到好晚，最後還一起研究地震險。"
+    },
+    {
+      "id": "testi-selfie",
+      "photo": "/images/testimonials/testi-selfie.jpg",
+      "quote": "希望妳事業蒸蒸日上，業績長紅。"
+    }
+  ]
+}

@@ -7,22 +7,39 @@ let CATEGORIES = [];
 let ARTICLES = [];
 let FAQS = [];
 let RESOURCES = [];
+let TESTIMONIALS = [];
 
 async function loadSiteData() {
-  const [catRes, artRes, faqRes, resRes] = await Promise.all([
+  const [catRes, artRes, faqRes, resRes, testiRes] = await Promise.all([
     fetch("data/categories.json"),
     fetch("data/articles.json"),
     fetch("data/faq.json"),
     fetch("data/resources.json"),
+    fetch("data/testimonials.json"),
   ]);
   const catData = await catRes.json();
   const artData = await artRes.json();
   const faqData = await faqRes.json();
   const resData = await resRes.json();
+  const testiData = await testiRes.json();
   CATEGORIES = catData.categories;
   ARTICLES = artData.articles;
   FAQS = faqData.faqs || [];
   RESOURCES = resData.resources || [];
+  TESTIMONIALS = testiData.testimonials || [];
+}
+
+/* ---------- 首頁：客戶怎麼說 ---------- */
+function renderTestimonials(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = TESTIMONIALS.map(
+    (t) => `
+    <div class="testimonial-item">
+      <span class="testimonial-photo" style="background-image:url('${t.photo}')"></span>
+      <p class="testimonial-quote">「${t.quote}」</p>
+    </div>`
+  ).join("");
 }
 
 /* ---------- 實用資源手風琴渲染 ---------- */
@@ -155,9 +172,10 @@ function renderCategoryGrid(containerId) {
 function articleCardHtml(article) {
   const cat = getCategoryBySlug(article.category);
   const cover = article.cover || (cat ? cat.banner : "");
+  const shortBadge = article.format === "short" ? `<span class="short-badge">短篇</span>` : "";
   return `
     <a class="article-card" href="article.html?id=${article.id}">
-      <span class="card-cover" style="background-image:url('${cover}')"></span>
+      <span class="card-cover" style="background-image:url('${cover}')">${shortBadge}</span>
       <span class="card-body">
         <span class="cat-tag">${cat ? (CATEGORY_ICONS[cat.slug] || "") + cat.name : ""}</span>
         <h3>${article.title}</h3>
@@ -174,7 +192,7 @@ function articleCardHtml(article) {
 function renderFeaturedArticles(containerId, count = 2) {
   const el = document.getElementById(containerId);
   if (!el) return;
-  const list = ARTICLES.filter((a) => !a.draft)
+  const list = ARTICLES.filter((a) => !a.draft && a.format !== "short")
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, count);
   el.innerHTML = list.map(articleCardHtml).join("");
@@ -362,18 +380,20 @@ function loadInstagramEmbed() {
 }
 
 /* ---------- 首頁：客戶故事輪播（短篇故事） ---------- */
+const STORY_TINTS = ["#3E2C23", "#5F5147", "#7A6A5A", "#8C6B4F", "#6B5849"];
+
 function renderStoryCarousel(containerId) {
   const el = document.getElementById(containerId);
   if (!el) return;
   const stories = ARTICLES.filter((a) => a.format === "short" && !a.draft);
   if (stories.length === 0) return;
   el.innerHTML = stories
-    .map((s) => {
+    .map((s, i) => {
       const cat = getCategoryBySlug(s.category);
-      const thumb = s.cover || (cat ? cat.banner : "");
+      const tint = STORY_TINTS[i % STORY_TINTS.length];
       return `
       <a class="story-card" href="article.html?id=${s.id}">
-        <span class="story-thumb" style="background-image:url('${thumb}')"><span>${s.title}</span></span>
+        <span class="story-thumb" style="background-color:${tint}"><span>${s.title}</span></span>
         <span class="story-body">
           <span class="story-cat">${cat ? cat.name : ""}</span>
           <span class="story-excerpt">${s.excerpt}</span>

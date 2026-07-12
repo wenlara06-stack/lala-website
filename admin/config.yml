@@ -49,6 +49,22 @@ collections:
               - { label: "內文", name: "content", widget: "markdown" }
               - { label: "還是草稿（先不要正式顯示）", name: "draft", widget: "boolean", required: false, default: false }
 
+  - name: "testimonials"
+    label: "💬 客戶怎麼說"
+    files:
+      - name: "testimonials"
+        label: "見證清單"
+        file: "data/testimonials.json"
+        fields:
+          - label: "見證清單"
+            name: "testimonials"
+            widget: "list"
+            summary: "{{quote}}"
+            fields:
+              - { label: "編號（id）", name: "id", widget: "string" }
+              - { label: "照片", name: "photo", widget: "image" }
+              - { label: "客戶的話", name: "quote", widget: "string" }
+
   - name: "resources"
     label: "🧰 實用資源"
     files:

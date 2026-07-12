@@ -51,17 +51,13 @@
 <section class="hero">
   <div class="wrap">
     <p class="hero-eyebrow">走 進 拉 拉 的 世 界</p>
-    <p class="hero-tagline">學理財、學生活、學從容，學著在混亂裡，活出自己想要的樣子</p>
     <h1 class="hero-statement">
-      人生想通了，<br class="mobile-break">
+      ✨人生想通了<br class="mobile-break">
       <span class="underline-word">財務自然有答案</span>
       <svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true">
         <path d="M2,12 C60,4 90,18 150,10 C210,3 250,16 298,9"/>
       </svg>
     </h1>
-    <p class="hero-sub">
-      我陪你的不是一次交易，是你整個人生的財務佈局。陪伴逾百個家庭，把理財、傳承、生活、老後，一件一件想清楚。
-    </p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="articles.html">看看拉拉的文章</a>
       <a class="btn btn-outline" href="about.html">認識拉拉</a>
@@ -98,7 +94,6 @@
       「真正的富足，不是帳戶裡的數字，<br class="mobile-break">
       而是你在人生每個重要時刻，都還有選擇的能力。」
     </blockquote>
-    <cite>— 拉拉</cite>
   </div>
 </section>
 
@@ -158,6 +153,15 @@
   </div>
 </section>
 
+<!-- ========== 客戶怎麼說 ========== -->
+<section class="testimonials-section">
+  <div class="wrap">
+    <p class="section-eyebrow" style="text-align:center;">FROM CLIENTS</p>
+    <h2 class="section-title">客戶怎麼說</h2>
+    <div class="testimonials-row" id="testimonialsRow"></div>
+  </div>
+</section>
+
 <!-- ========== 精選文章 ========== -->
 <section class="featured-section">
   <div class="wrap">
@@ -175,7 +179,7 @@
   <div class="wrap newsletter-box">
     <div>
       <h3>訂閱拉拉的文字</h3>
-      <p>如果你也喜歡把事情慢慢想清楚，訂閱信箱，收到拉拉不定期的新文章。</p>
+      <p>如果你也喜歡把事情慢慢想清楚，訂閱信箱，不定期收到新文章。</p>
     </div>
     <form action="https://YOUR-ACCOUNT.usX.list-manage.com/subscribe/post?u=YOUR_U&amp;id=YOUR_ID" method="post" target="_blank" class="newsletter-form">
       <input type="email" name="EMAIL" placeholder="輸入你的 email" required>
@@ -214,7 +218,7 @@
         </div>
       </div>
     </div>
-    <div class="footer-bottom">© 2026 余玟萱 拉拉．All rights reserved.</div>
+    <div class="footer-bottom">© 2026 余玟萱 拉拉．All rights reserved.<br>著作權所有，轉載請註明出處。</div>
   </div>
 </footer>
 
@@ -223,6 +227,7 @@
   loadSiteData().then(() => {
     renderCategoryGrid("categoryGrid");
     renderStoryCarousel("storyCarousel");
+    renderTestimonials("testimonialsRow");
     renderFeaturedArticles("featuredArticles", 2);
   });
 </script>
