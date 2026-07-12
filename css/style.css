@@ -235,7 +235,7 @@ h1, h2, h3, h4 {
   text-align: center;
   position: relative;
   background: linear-gradient(180deg, rgba(29, 20, 15, 0.72), rgba(29, 20, 15, 0.55) 55%, var(--color-bg) 96%),
-              url("images/art/banner-home.jpg") center 25% / cover no-repeat;
+              url("/images/art/banner-home.jpg") center 25% / cover no-repeat;
   color: #F7F2EA;
 }
 
@@ -341,6 +341,48 @@ h1, h2, h3, h4 {
    引言區塊
    ========================================================================== */
 
+.quiet-stats {
+  padding: var(--space-md) 0;
+  text-align: center;
+}
+.quiet-stats p {
+  font-size: 0.85rem;
+  color: var(--color-milktea-deep);
+  letter-spacing: 0.04em;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--color-line);
+  padding: var(--space-sm) 0;
+}
+.faq-item summary {
+  cursor: pointer;
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  color: var(--color-brown);
+  padding: 6px 0;
+  list-style: none;
+  position: relative;
+  padding-right: 28px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  font-size: 1.2rem;
+  color: var(--color-milktea-deep);
+  transition: transform 0.25s ease;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p {
+  color: var(--color-brown-soft);
+  font-size: 0.92rem;
+  padding: 8px 0 4px;
+  line-height: 1.9;
+}
+
 .quote-block {
   background: var(--color-bg-card);
   border-top: 1px solid var(--color-line);
@@ -360,6 +402,7 @@ h1, h2, h3, h4 {
 
 .quote-block cite {
   display: block;
+  text-align: center;
   margin-top: var(--space-sm);
   font-style: normal;
   font-size: 0.85rem;
@@ -486,11 +529,11 @@ h1, h2, h3, h4 {
   transform: translateY(-5px);
   box-shadow: 0 20px 36px -16px rgba(62, 44, 35, 0.42);
 }
-.category-card.cat-money { background-image: url("images/art/cat-money.jpg"); }
-.category-card.cat-love  { background-image: url("images/art/cat-love.jpg"); }
-.category-card.cat-grace { background-image: url("images/art/cat-grace.jpg"); }
-.category-card.cat-aging { background-image: url("images/art/cat-aging.jpg"); }
-.category-card.cat-care  { background-image: url("images/art/cat-care.jpg"); }
+.category-card.cat-money { background-image: url("/images/art/cat-money.jpg"); }
+.category-card.cat-love  { background-image: url("/images/art/cat-love.jpg"); }
+.category-card.cat-grace { background-image: url("/images/art/cat-grace.jpg"); }
+.category-card.cat-aging { background-image: url("/images/art/cat-aging.jpg"); }
+.category-card.cat-care  { background-image: url("/images/art/cat-care.jpg"); }
 
 .category-card .cat-scrim {
   position: relative;
@@ -585,6 +628,7 @@ h1, h2, h3, h4 {
 
 .about-photo {
   aspect-ratio: 4 / 5;
+  max-width: 420px;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 22px 44px -22px rgba(62, 44, 35, 0.38);
@@ -603,6 +647,8 @@ h1, h2, h3, h4 {
   align-items: center;
 }
 .lifestyle-photo {
+  max-width: 420px;
+  margin-left: auto;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 20px 40px -20px rgba(62, 44, 35, 0.32);
@@ -651,10 +697,18 @@ h1, h2, h3, h4 {
 .about-section h2 { font-size: 1.5rem; margin-bottom: var(--space-md); }
 .about-section p { color: var(--color-brown-soft); margin-bottom: var(--space-sm); max-width: 720px; }
 
+.honors-layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+.honors-text p { max-width: none; }
+
 .honor-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-sm) var(--space-lg);
+  grid-template-columns: 1fr;
+  gap: 0;
   margin-top: var(--space-md);
 }
 .honor-item {
@@ -840,11 +894,14 @@ h1, h2, h3, h4 {
 .article-body p strong { color: var(--color-brown); }
 .article-body blockquote {
   border-left: 3px solid var(--color-milktea);
-  padding-left: var(--space-sm);
+  background: var(--color-bg-card);
+  border-radius: 0 6px 6px 0;
+  padding: var(--space-sm) var(--space-md);
   margin: var(--space-md) 0;
   font-family: var(--font-serif);
   color: var(--color-brown);
   font-size: 1.1rem;
+  line-height: 1.8;
 }
 .article-body ul { margin: 0 0 var(--space-sm) 1.2rem; color: var(--color-brown-soft); }
 
@@ -859,14 +916,130 @@ h1, h2, h3, h4 {
 }
 .article-footer-cta p { margin-bottom: var(--space-sm); color: var(--color-brown-soft); }
 
+.cta-social-links {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+}
+.btn-outline-dark {
+  border: 1px solid var(--color-brown);
+  color: var(--color-brown);
+  background: transparent;
+}
+.btn-outline-dark:hover { background: var(--color-brown); color: var(--color-white); }
+
+.brand-signature {
+  border-top: 1px solid var(--color-line);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  text-align: left;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.brand-signature p {
+  font-size: 0.88rem;
+  margin-bottom: 8px;
+}
+.brand-signature strong { color: var(--color-brown); }
+
+.related-articles {
+  max-width: 700px;
+  margin: var(--space-xl) auto 0;
+}
+.related-articles h3 {
+  font-size: 1.15rem;
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+.related-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+}
+.related-item {
+  display: block;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px -8px rgba(62, 44, 35, 0.2);
+  transition: transform 0.25s ease;
+}
+.related-item:hover { transform: translateY(-3px); }
+.related-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+}
+.related-title {
+  display: block;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  color: var(--color-brown);
+  background: var(--color-bg-card);
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .related-list { grid-template-columns: 1fr; }
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+.social-icons a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentColor;
+  color: inherit;
+  opacity: 0.85;
+  transition: opacity 0.25s ease, background 0.25s ease;
+}
+.social-icons a:hover { opacity: 1; background: rgba(255, 255, 255, 0.12); }
+.social-icons svg { width: 17px; height: 17px; }
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-top: var(--space-sm);
+}
+.footer-social a {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #7A6A5A;
+  color: #E8DDD0;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+.footer-social a:hover { border-color: var(--color-milktea); color: var(--color-bg); }
+.footer-social svg { width: 16px; height: 16px; }
+
 .ig-embed-grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
   gap: var(--space-md);
-  justify-content: center;
   margin: var(--space-md) 0;
 }
-.ig-embed-grid blockquote.instagram-media { margin: 0 !important; }
+.ig-embed-grid blockquote.instagram-media {
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 400px !important;
+  min-width: 0 !important;
+}
 
 /* ==========================================================================
    電子報訂閱
@@ -924,11 +1097,13 @@ h1, h2, h3, h4 {
 .back-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.88rem;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--color-milktea-deep);
-  margin-bottom: var(--space-md);
+  margin: var(--space-lg) 0 var(--space-md);
 }
+.back-link:hover { color: var(--color-brown); }
 
 /* ==========================================================================
    響應式：平板 / 手機
@@ -944,6 +1119,8 @@ h1, h2, h3, h4 {
   .lifestyle-grid { grid-template-columns: 1fr; }
   .lifestyle-grid .lifestyle-photo { order: -1; max-width: 360px; margin: 0 auto; }
   .honor-grid, .service-grid { grid-template-columns: 1fr; }
+  .honors-layout { grid-template-columns: 1fr; }
+  .honor-photos { max-width: 340px; margin: var(--space-md) auto 0; }
   .article-list { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: var(--space-md); text-align: center; }
 }

@@ -5,16 +5,33 @@
 /* ---------- 資料載入：從 data/*.json 讀取（後台系統會直接編輯這兩個檔案） ---------- */
 let CATEGORIES = [];
 let ARTICLES = [];
+let FAQS = [];
 
 async function loadSiteData() {
-  const [catRes, artRes] = await Promise.all([
+  const [catRes, artRes, faqRes] = await Promise.all([
     fetch("data/categories.json"),
     fetch("data/articles.json"),
+    fetch("data/faq.json"),
   ]);
   const catData = await catRes.json();
   const artData = await artRes.json();
+  const faqData = await faqRes.json();
   CATEGORIES = catData.categories;
   ARTICLES = artData.articles;
+  FAQS = faqData.faqs || [];
+}
+
+/* ---------- FAQ 手風琴渲染 ---------- */
+function renderFAQ(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = FAQS.map(
+    (f) => `
+    <details class="faq-item">
+      <summary>${f.question}</summary>
+      <p>${f.answer}</p>
+    </details>`
+  ).join("");
 }
 
 /* ---------- 導覽列：手機選單 / 搜尋列展開 ---------- */
@@ -240,9 +257,19 @@ function initArticlePage() {
       <div class="article-body">
         ${typeof marked !== "undefined" ? marked.parse(article.content) : article.content}
       </div>
+      ${relatedArticlesHtml(article)}
       <div class="article-footer-cta">
         <p>如果這篇文章讓你想到自己的狀況，歡迎找拉拉聊聊。</p>
-        <a class="btn btn-primary" href="https://line.me/R/ti/p/@yourlineid" target="_blank" rel="noopener">預約諮詢</a>
+        <div class="cta-social-links">
+          <a class="btn btn-primary" href="https://line.me/ti/p/OS92ei6lpr" target="_blank" rel="noopener">LINE 預約諮詢</a>
+          <a class="btn btn-outline-dark" href="https://www.instagram.com/yuwen06/" target="_blank" rel="noopener">追蹤 Instagram</a>
+        </div>
+        <div class="brand-signature">
+          <p><strong>Hi，我是拉拉 🤍</strong></p>
+          <p>陪你走過人生每個重要時刻。每一次對話，都是一個人生難題被認真解開的時刻。</p>
+          <p><strong>我能幫你的事：</strong>個人保障｜創富陪跑｜家族傳承｜房產活化</p>
+          <p><strong>專業榮譽：</strong>MDRT 百萬圓桌｜IDA 國際龍獎｜IFPA 亞太精英獎｜富邦之星｜長照銷售第一名</p>
+        </div>
       </div>
     </div>`;
 
@@ -250,6 +277,30 @@ function initArticlePage() {
   if (article.content.includes("instagram-media")) {
     loadInstagramEmbed();
   }
+}
+
+/* ---------- 同系列文章推薦 ---------- */
+function relatedArticlesHtml(article) {
+  const related = ARTICLES.filter((a) => a.category === article.category && a.id !== article.id && !a.draft)
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 3);
+  if (related.length === 0) return "";
+  const cat = getCategoryBySlug(article.category);
+  return `
+    <div class="related-articles">
+      <h3>更多「${cat ? cat.name : ""}」的文章</h3>
+      <div class="related-list">
+        ${related
+          .map(
+            (a) => `
+          <a class="related-item" href="article.html?id=${a.id}">
+            <span class="related-thumb" style="background-image:url('${a.cover || (cat ? cat.banner : "")}')"></span>
+            <span class="related-title">${a.title}</span>
+          </a>`
+          )
+          .join("")}
+      </div>
+    </div>`;
 }
 
 function loadInstagramEmbed() {

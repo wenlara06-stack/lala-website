@@ -5,35 +5,35 @@
       "name": "學著把錢想清楚",
       "subtitle": "理財規劃",
       "icon": "🌾",
-      "banner": "images/art/cat-money.jpg"
+      "banner": "/images/art/cat-money.jpg"
     },
     {
       "slug": "love",
       "name": "把愛好好留下來",
       "subtitle": "世代傳承",
       "icon": "🕊",
-      "banner": "images/art/cat-love.jpg"
+      "banner": "/images/art/cat-love.jpg"
     },
     {
       "slug": "grace",
       "name": "學著從容過日子",
       "subtitle": "優雅生活",
       "icon": "🍃",
-      "banner": "images/art/cat-grace.jpg"
+      "banner": "/images/art/cat-grace.jpg"
     },
     {
       "slug": "aging",
       "name": "照著想要的方式老去",
       "subtitle": "退休安養",
       "icon": "🌤",
-      "banner": "images/art/cat-aging.jpg"
+      "banner": "/images/art/cat-aging.jpg"
     },
     {
       "slug": "care",
       "name": "學著照顧自己",
       "subtitle": "客戶理賠",
       "icon": "🌱",
-      "banner": "images/art/cat-care.jpg"
+      "banner": "/images/art/cat-care.jpg"
     }
   ]
 }

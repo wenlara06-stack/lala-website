@@ -40,6 +40,21 @@ collections:
               - { label: "內文", name: "content", widget: "markdown" }
               - { label: "還是草稿（先不要正式顯示）", name: "draft", widget: "boolean", required: false, default: false }
 
+  - name: "faq"
+    label: "❓ 常見問題"
+    files:
+      - name: "faq"
+        label: "FAQ 清單"
+        file: "data/faq.json"
+        fields:
+          - label: "問題清單"
+            name: "faqs"
+            widget: "list"
+            summary: "{{question}}"
+            fields:
+              - { label: "問題", name: "question", widget: "string" }
+              - { label: "回答", name: "answer", widget: "text" }
+
   - name: "categories"
     label: "🗂 五個分類設定"
     files:
