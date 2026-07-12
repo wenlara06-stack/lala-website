@@ -406,11 +406,14 @@ function relatedArticlesHtml(article) {
       <div class="related-list">
         ${related
           .map(
-            (a) => `
+            (a) => {
+              const thumb = a.format === "short" ? (cat ? cat.banner : "") : (a.cover || (cat ? cat.banner : ""));
+              return `
           <a class="related-item" href="article.html?id=${a.id}">
-            <span class="related-thumb" style="background-image:url('${a.cover || (cat ? cat.banner : "")}')"></span>
+            <span class="related-thumb" style="background-image:url('${thumb}')"></span>
             <span class="related-title">${a.title}</span>
-          </a>`
+          </a>`;
+            }
           )
           .join("")}
       </div>

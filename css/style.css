@@ -1485,8 +1485,10 @@ h1, h2, h3, h4 {
   .intro-grid { grid-template-columns: 1fr; }
   .category-grid { grid-template-columns: repeat(2, 1fr); }
   .about-hero { grid-template-columns: 1fr; }
-  .about-photo { max-width: 320px; margin: 0 auto; }
+  .about-photo { max-width: 340px; margin: 0 auto; }
+  .about-intro { padding: 0 24px; }
   .lifestyle-grid { grid-template-columns: 1fr; }
+  .lifestyle-grid > div:first-child { padding: 0 24px; }
   .lifestyle-grid .lifestyle-photo { order: -1; max-width: 340px; margin: 0 auto; }
   .honor-grid, .service-grid { grid-template-columns: 1fr; }
   .honors-layout { grid-template-columns: 1fr; }
