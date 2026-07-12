@@ -269,13 +269,12 @@ function initArticlesPage() {
 /* ---------- 文章分享列 ---------- */
 function shareBarHtml(title) {
   const url = encodeURIComponent(window.location.href);
-  const text = encodeURIComponent(title);
   return `
     <div class="share-bar">
       <span class="share-label">分享這篇</span>
-      <a class="share-btn" href="https://social-plugins.line.me/lineit/share?url=${url}&text=${text}" target="_blank" rel="noopener" aria-label="分享到 LINE">
+      <button class="share-btn share-copy-btn" type="button" aria-label="複製連結（可分享到 LINE）" title="複製連結，可貼到 LINE">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-      </a>
+      </button>
       <button class="share-btn share-copy-btn" type="button" aria-label="複製連結（可分享到 IG）" title="複製連結，可貼到 IG 限動或訊息">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
       </button>

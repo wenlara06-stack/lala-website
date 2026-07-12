@@ -357,15 +357,12 @@ h1, h2, h3, h4 {
 }
 .gallery-item {
   position: relative;
-  aspect-ratio: 3 / 4;
   border-radius: 6px;
   overflow: hidden;
 }
 .gallery-item img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  height: auto;
   display: block;
 }
 .gallery-caption {
@@ -460,6 +457,8 @@ h1, h2, h3, h4 {
   transition: transform 0.4s ease;
 }
 .story-card {
+  display: flex;
+  flex-direction: column;
   flex: 0 0 calc(25% - (var(--space-sm) * 3 / 4));
   flex-shrink: 0;
   background: var(--color-bg-card);
@@ -483,7 +482,7 @@ h1, h2, h3, h4 {
   color: #F7F2EA;
   line-height: 1.6;
 }
-.story-card .story-body { padding: 24px 28px 26px; }
+.story-card .story-body { display: block; padding: 24px 28px 26px; }
 .story-body-top {
   display: flex;
   align-items: baseline;
@@ -508,6 +507,7 @@ h1, h2, h3, h4 {
   display: block;
 }
 .story-card .story-excerpt {
+  display: block;
   font-size: 0.78rem;
   color: var(--color-brown-soft);
   line-height: 1.7;
@@ -888,14 +888,19 @@ h1, h2, h3, h4 {
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
-  max-width: 340px;
+  max-width: 230px;
+  margin: 0 auto;
 }
 .honor-photos figure { margin: 0; }
+.honor-photos .photo-frame {
+  display: block;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 14px 28px -16px rgba(62, 44, 35, 0.3);
+}
 .honor-photos img {
   width: 100%;
   height: auto;
-  border-radius: 6px;
-  box-shadow: 0 14px 28px -16px rgba(62, 44, 35, 0.3);
   display: block;
 }
 .honor-photos figcaption {
@@ -913,7 +918,7 @@ h1, h2, h3, h4 {
   color: var(--color-milktea-deep);
   letter-spacing: 0.1em;
   font-size: 0.85rem;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-xs);
   display: block;
 }
 .about-intro p { margin-bottom: var(--space-sm); color: var(--color-brown-soft); }
@@ -1485,7 +1490,7 @@ h1, h2, h3, h4 {
   .lifestyle-grid .lifestyle-photo { order: -1; max-width: 360px; margin: 0 auto; }
   .honor-grid, .service-grid { grid-template-columns: 1fr; }
   .honors-layout { grid-template-columns: 1fr; }
-  .honor-photos { max-width: 340px; margin: var(--space-md) auto 0; flex-direction: column; }
+  .honor-photos { max-width: 230px; margin: var(--space-md) auto 0; flex-direction: column; }
   .honor-photos img { width: 100%; height: auto; }
   .article-list { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: var(--space-md); text-align: center; }
