@@ -172,13 +172,13 @@ function renderCategoryGrid(containerId) {
 function articleCardHtml(article) {
   const cat = getCategoryBySlug(article.category);
   const cover = article.cover || (cat ? cat.banner : "");
-  const shortBadge = article.format === "short" ? `<span class="short-badge">短篇</span>` : "";
+  const shortBadge = article.format === "short" ? `<span class="short-badge-inline">短篇</span>` : "";
   return `
     <a class="article-card" href="article.html?id=${article.id}">
-      <span class="card-cover" style="background-image:url('${cover}')">${shortBadge}</span>
+      <span class="card-cover" style="background-image:url('${cover}')"></span>
       <span class="card-body">
         <span class="cat-tag">${cat ? (CATEGORY_ICONS[cat.slug] || "") + cat.name : ""}</span>
-        <h3>${article.title}</h3>
+        <h3 class="card-title-row">${article.title}${shortBadge}</h3>
         <p class="excerpt">${article.excerpt}</p>
         <div class="meta">
           <span>${formatDate(article.date)}</span>
@@ -261,6 +261,43 @@ function initArticlesPage() {
 }
 
 /* ---------- 單篇文章頁 ---------- */
+/* ---------- 文章分享列 ---------- */
+function shareBarHtml(title) {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent(title);
+  return `
+    <div class="share-bar">
+      <span class="share-label">分享這篇</span>
+      <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" rel="noopener" aria-label="分享到 Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg>
+      </a>
+      <a class="share-btn" href="https://social-plugins.line.me/lineit/share?url=${url}&text=${text}" target="_blank" rel="noopener" aria-label="分享到 LINE">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      </a>
+      <button class="share-btn share-copy-btn" type="button" aria-label="複製連結（可分享到 IG）" title="複製連結，可貼到 IG 限動或訊息">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      </button>
+      <span class="share-copied-tip" id="shareCopiedTip">連結已複製，可貼到 IG 限動或訊息！</span>
+    </div>`;
+}
+
+function initShareBar() {
+  const btn = document.querySelector(".share-copy-btn");
+  const tip = document.getElementById("shareCopiedTip");
+  if (!btn) return;
+  btn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      if (tip) {
+        tip.classList.add("show");
+        setTimeout(() => tip.classList.remove("show"), 2200);
+      }
+    } catch (e) {
+      /* 剪貼簿權限被拒絕時，靜默失敗即可 */
+    }
+  });
+}
+
 function initArticlePage() {
   const container = document.getElementById("articleContainer");
   if (!container) return;
@@ -284,23 +321,29 @@ function initArticlePage() {
   document.title = article.title + "｜余玟萱 拉拉";
 
   if (article.format === "short") {
+    const sideImg = article.cover || "";
     container.innerHTML = `
-      <div class="short-banner" style="background-image:url('${cover}')">
+      <div class="short-banner" style="background-image:url('${cat ? cat.banner : ""}')">
         <span class="short-banner-label">${cat ? cat.name : ""}</span>
       </div>
       <div class="wrap short-story-wrap">
         <a class="back-link" href="articles.html">← 回文章列表</a>
         <div class="short-story-header">
-          <h1>${article.title}</h1>
+          <h1 class="card-title-row" style="justify-content:center;">${article.title}<span class="short-badge-inline">短篇</span></h1>
           <div class="meta">${formatDate(article.date)}　・　真實故事</div>
+          ${shareBarHtml(article.title)}
         </div>
-        <div class="article-body short-story-body">
-          ${typeof marked !== "undefined" ? marked.parse(article.content) : article.content}
+        <div class="short-story-layout">
+          ${sideImg ? `<span class="short-side-image" style="background-image:url('${sideImg}')"></span>` : ""}
+          <div class="article-body short-story-body">
+            ${typeof marked !== "undefined" ? marked.parse(article.content) : article.content}
+          </div>
         </div>
         <div class="short-story-cta">
           <a class="btn btn-primary" href="https://line.me/ti/p/OS92ei6lpr" target="_blank" rel="noopener">LINE 預約諮詢</a>
         </div>
       </div>`;
+    initShareBar();
     if (article.content.includes("instagram-media")) loadInstagramEmbed();
     return;
   }
@@ -313,6 +356,7 @@ function initArticlePage() {
         <span class="cat-tag">${cat ? (CATEGORY_ICONS[cat.slug] || "") + cat.name : ""}</span>
         <h1>${article.title}</h1>
         <div class="meta">${formatDate(article.date)}　·　${article.readTime || ""}</div>
+        ${shareBarHtml(article.title)}
       </div>
       <div class="article-body">
         ${typeof marked !== "undefined" ? marked.parse(article.content) : article.content}
@@ -332,6 +376,8 @@ function initArticlePage() {
         </div>
       </div>
     </div>`;
+
+  initShareBar();
 
   // 如果文章內含 Instagram 嵌入，載入 IG 的嵌入腳本並渲染
   if (article.content.includes("instagram-media")) {
@@ -380,33 +426,47 @@ function loadInstagramEmbed() {
 }
 
 /* ---------- 首頁：客戶故事輪播（短篇故事） ---------- */
-const STORY_TINTS = ["#3E2C23", "#5F5147", "#7A6A5A", "#8C6B4F", "#6B5849"];
-
 function renderStoryCarousel(containerId) {
   const el = document.getElementById(containerId);
   if (!el) return;
   const stories = ARTICLES.filter((a) => a.format === "short" && !a.draft);
   if (stories.length === 0) return;
   el.innerHTML = stories
-    .map((s, i) => {
+    .map((s) => {
       const cat = getCategoryBySlug(s.category);
-      const tint = STORY_TINTS[i % STORY_TINTS.length];
+      const thumb = cat ? cat.banner : "";
       return `
       <a class="story-card" href="article.html?id=${s.id}">
-        <span class="story-thumb" style="background-color:${tint}"><span>${s.title}</span></span>
+        <span class="story-thumb" style="background-image:url('${thumb}')"></span>
         <span class="story-body">
           <span class="story-cat">${cat ? cat.name : ""}</span>
+          <span class="story-title-row">
+            <span class="story-title">${s.title}</span>
+            <span class="story-short-badge">短篇</span>
+          </span>
           <span class="story-excerpt">${s.excerpt}</span>
         </span>
       </a>`;
     })
     .join("");
 
-  const track = document.getElementById(containerId).parentElement;
+  const wrap = el.parentElement; // .carousel-track-wrap
   const prevBtn = document.getElementById("storyPrev");
   const nextBtn = document.getElementById("storyNext");
-  if (prevBtn) prevBtn.addEventListener("click", () => track.scrollBy({ left: -280, behavior: "smooth" }));
-  if (nextBtn) nextBtn.addEventListener("click", () => track.scrollBy({ left: 280, behavior: "smooth" }));
+  const perPage = 4;
+  const totalPages = Math.ceil(stories.length / perPage);
+  let page = 0;
+
+  function update() {
+    const pageWidth = wrap.clientWidth;
+    el.style.transform = `translateX(-${page * pageWidth}px)`;
+    if (prevBtn) prevBtn.disabled = page === 0;
+    if (nextBtn) nextBtn.disabled = page >= totalPages - 1;
+  }
+  if (prevBtn) prevBtn.addEventListener("click", () => { page = Math.max(0, page - 1); update(); });
+  if (nextBtn) nextBtn.addEventListener("click", () => { page = Math.min(totalPages - 1, page + 1); update(); });
+  window.addEventListener("resize", update);
+  update();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
