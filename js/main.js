@@ -6,19 +6,39 @@
 let CATEGORIES = [];
 let ARTICLES = [];
 let FAQS = [];
+let RESOURCES = [];
 
 async function loadSiteData() {
-  const [catRes, artRes, faqRes] = await Promise.all([
+  const [catRes, artRes, faqRes, resRes] = await Promise.all([
     fetch("data/categories.json"),
     fetch("data/articles.json"),
     fetch("data/faq.json"),
+    fetch("data/resources.json"),
   ]);
   const catData = await catRes.json();
   const artData = await artRes.json();
   const faqData = await faqRes.json();
+  const resData = await resRes.json();
   CATEGORIES = catData.categories;
   ARTICLES = artData.articles;
   FAQS = faqData.faqs || [];
+  RESOURCES = resData.resources || [];
+}
+
+/* ---------- 實用資源手風琴渲染 ---------- */
+function renderResources(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = RESOURCES.map(
+    (r) => `
+    <details class="resource-item">
+      <summary>
+        <span class="resource-tag">${r.tag}</span>
+        <span class="resource-title">${r.title}</span>
+      </summary>
+      <div class="resource-body">${r.content}</div>
+    </details>`
+  ).join("");
 }
 
 /* ---------- FAQ 手風琴渲染 ---------- */
@@ -245,6 +265,28 @@ function initArticlePage() {
   const cover = article.cover || (cat ? cat.banner : "");
   document.title = article.title + "｜余玟萱 拉拉";
 
+  if (article.format === "short") {
+    container.innerHTML = `
+      <div class="short-banner" style="background-image:url('${cover}')">
+        <span class="short-banner-label">${cat ? cat.name : ""}</span>
+      </div>
+      <div class="wrap short-story-wrap">
+        <a class="back-link" href="articles.html">← 回文章列表</a>
+        <div class="short-story-header">
+          <h1>${article.title}</h1>
+          <div class="meta">${formatDate(article.date)}　・　真實故事</div>
+        </div>
+        <div class="article-body short-story-body">
+          ${typeof marked !== "undefined" ? marked.parse(article.content) : article.content}
+        </div>
+        <div class="short-story-cta">
+          <a class="btn btn-primary" href="https://line.me/ti/p/OS92ei6lpr" target="_blank" rel="noopener">LINE 預約諮詢</a>
+        </div>
+      </div>`;
+    if (article.content.includes("instagram-media")) loadInstagramEmbed();
+    return;
+  }
+
   container.innerHTML = `
     ${cover ? `<div class="article-cover" style="background-image:url('${cover}')"></div>` : ""}
     <div class="wrap">
@@ -268,7 +310,7 @@ function initArticlePage() {
           <p><strong>Hi，我是拉拉 🤍</strong></p>
           <p>陪你走過人生每個重要時刻。每一次對話，都是一個人生難題被認真解開的時刻。</p>
           <p><strong>我能幫你的事：</strong>個人保障｜創富陪跑｜家族傳承｜房產活化</p>
-          <p><strong>專業榮譽：</strong>MDRT 百萬圓桌｜IDA 國際龍獎｜IFPA 亞太精英獎｜富邦之星｜長照銷售第一名</p>
+          <p><strong>專業榮譽：</strong><br>MDRT 百萬圓桌｜IDA 國際龍獎｜IFPA 亞太精英獎<br>富邦之星｜長照銷售第一名</p>
         </div>
       </div>
     </div>`;
@@ -317,6 +359,34 @@ function loadInstagramEmbed() {
     if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
   };
   document.body.appendChild(script);
+}
+
+/* ---------- 首頁：客戶故事輪播（短篇故事） ---------- */
+function renderStoryCarousel(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const stories = ARTICLES.filter((a) => a.format === "short" && !a.draft);
+  if (stories.length === 0) return;
+  el.innerHTML = stories
+    .map((s) => {
+      const cat = getCategoryBySlug(s.category);
+      const thumb = s.cover || (cat ? cat.banner : "");
+      return `
+      <a class="story-card" href="article.html?id=${s.id}">
+        <span class="story-thumb" style="background-image:url('${thumb}')"><span>${s.title}</span></span>
+        <span class="story-body">
+          <span class="story-cat">${cat ? cat.name : ""}</span>
+          <span class="story-excerpt">${s.excerpt}</span>
+        </span>
+      </a>`;
+    })
+    .join("");
+
+  const track = document.getElementById(containerId).parentElement;
+  const prevBtn = document.getElementById("storyPrev");
+  const nextBtn = document.getElementById("storyNext");
+  if (prevBtn) prevBtn.addEventListener("click", () => track.scrollBy({ left: -280, behavior: "smooth" }));
+  if (nextBtn) nextBtn.addEventListener("click", () => track.scrollBy({ left: 280, behavior: "smooth" }));
 }
 
 document.addEventListener("DOMContentLoaded", () => {

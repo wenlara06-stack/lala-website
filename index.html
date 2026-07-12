@@ -18,6 +18,7 @@
         <a href="index.html" class="active">首頁</a>
         <a href="about.html">關於我</a>
         <a href="articles.html">文章</a>
+        <a href="resources.html">實用資源</a>
       </div>
       <div class="nav-tools">
         <button class="search-toggle-btn" id="searchToggle" aria-label="搜尋">
@@ -42,6 +43,7 @@
   <a href="index.html">首頁</a>
   <a href="about.html">關於我</a>
   <a href="articles.html">文章</a>
+  <a href="resources.html">實用資源</a>
   <a href="https://line.me/ti/p/OS92ei6lpr" target="_blank" rel="noopener">預約諮詢</a>
 </nav>
 
@@ -49,6 +51,7 @@
 <section class="hero">
   <div class="wrap">
     <p class="hero-eyebrow">走 進 拉 拉 的 世 界</p>
+    <p class="hero-tagline">學理財、學生活、學從容，學著在混亂裡，活出自己想要的樣子</p>
     <h1 class="hero-statement">
       人生想通了，<br class="mobile-break">
       <span class="underline-word">財務自然有答案</span>
@@ -57,7 +60,7 @@
       </svg>
     </h1>
     <p class="hero-sub">
-      做這份工作之前，我也是那個不知道錢要怎麼放的人。後來我才明白，讓人焦慮的從來不是收入多寡，而是沒有想通錢的本質——想清楚了，才有真正的從容。
+      我陪你的不是一次交易，是你整個人生的財務佈局。陪伴逾百個家庭，把理財、傳承、生活、老後，一件一件想清楚。
     </p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="articles.html">看看拉拉的文章</a>
@@ -70,7 +73,7 @@
       <a href="https://line.me/ti/p/OS92ei6lpr" target="_blank" rel="noopener" aria-label="LINE">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
       </a>
-      <a href="#" target="_blank" rel="noopener" aria-label="Facebook">
+      <a href="https://www.facebook.com/yu.lara.5/?locale=zh_TW" target="_blank" rel="noopener" aria-label="Facebook">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg>
       </a>
     </div>
@@ -95,7 +98,7 @@
       「真正的富足，不是帳戶裡的數字，<br class="mobile-break">
       而是你在人生每個重要時刻，都還有選擇的能力。」
     </blockquote>
-    <cite>— 學理財、學生活、學從容，學著在混亂裡，活出自己想要的樣子</cite>
+    <cite>— 拉拉</cite>
   </div>
 </section>
 
@@ -106,7 +109,7 @@
       <div class="intro-card">
         <span class="tag">ABOUT</span>
         <h3>關於拉拉</h3>
-        <p>陪伴逾百個家庭走過每個重要時刻。看看拉拉的故事、專業背景與服務項目。</p>
+        <p>陪伴逾百個家庭走過每個重要時刻</p>
         <a class="card-link" href="about.html">認識拉拉 →</a>
       </div>
       <div class="intro-card">
@@ -118,7 +121,7 @@
       <div class="intro-card">
         <span class="tag">BOOKING</span>
         <h3>預約一次聊聊</h3>
-        <p>我陪你的不是一次交易，是你整個人生的財務佈局。有人生大事，找拉拉。</p>
+        <p>我陪你的不是一次交易，是你整個人生的財務佈局<br>有人生大事，找拉拉</p>
         <a class="card-link" href="https://line.me/ti/p/OS92ei6lpr" target="_blank" rel="noopener">預約諮詢 →</a>
       </div>
     </div>
@@ -136,12 +139,31 @@
   </div>
 </section>
 
+<!-- ========== 客戶故事輪播 ========== -->
+<section class="stories-carousel-section">
+  <div class="wrap">
+    <div class="carousel-head">
+      <div>
+        <p class="section-eyebrow">REAL STORIES</p>
+        <h2 class="section-title" style="text-align:left; display:block; padding-bottom:0;">她們的故事</h2>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-btn" id="storyPrev" aria-label="上一則">‹</button>
+        <button class="carousel-btn" id="storyNext" aria-label="下一則">›</button>
+      </div>
+    </div>
+  </div>
+  <div class="carousel-track-wrap">
+    <div class="carousel-track" id="storyCarousel"></div>
+  </div>
+</section>
+
 <!-- ========== 精選文章 ========== -->
 <section class="featured-section">
   <div class="wrap">
     <div class="section-title-wrap">
-      <p class="section-eyebrow">REAL STORIES</p>
-      <h2 class="section-title">每一篇，都是真實的人生故事</h2>
+      <p class="section-eyebrow">LATEST WRITING</p>
+      <h2 class="section-title">想清楚以後，寫下來的字</h2>
     </div>
     <div class="article-list" id="featuredArticles" style="padding-bottom: var(--space-xl);"></div>
   </div>
@@ -174,6 +196,7 @@
         <p><a href="index.html">首頁</a></p>
         <p><a href="about.html">關於我</a></p>
         <p><a href="articles.html">文章</a></p>
+        <p><a href="resources.html">實用資源</a></p>
       </div>
       <div>
         <h5 style="font-size:1rem;">聯絡</h5>
@@ -185,7 +208,7 @@
           <a href="https://line.me/ti/p/OS92ei6lpr" target="_blank" rel="noopener" aria-label="LINE">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
           </a>
-          <a href="#" target="_blank" rel="noopener" aria-label="Facebook">
+          <a href="https://www.facebook.com/yu.lara.5/?locale=zh_TW" target="_blank" rel="noopener" aria-label="Facebook">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z"/></svg>
           </a>
         </div>
@@ -199,6 +222,7 @@
 <script>
   loadSiteData().then(() => {
     renderCategoryGrid("categoryGrid");
+    renderStoryCarousel("storyCarousel");
     renderFeaturedArticles("featuredArticles", 2);
   });
 </script>

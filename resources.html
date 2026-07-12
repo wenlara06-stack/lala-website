@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>文章｜余玟萱 拉拉</title>
-<meta name="description" content="學著把錢想清楚、把愛好好留下來、學著從容過日子、照著想要的方式老去、學著照顧自己。">
+<title>實用資源｜余玟萱 拉拉</title>
+<meta name="description" content="整理常見的申請流程與文件，勞工職災、社會保險、旅平險，需要的時候可以直接查。">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,8 +16,8 @@
       <div class="nav-links">
         <a href="index.html">首頁</a>
         <a href="about.html">關於我</a>
-        <a href="articles.html" class="active">文章</a>
-        <a href="resources.html">實用資源</a>
+        <a href="articles.html">文章</a>
+        <a href="resources.html" class="active">實用資源</a>
       </div>
       <div class="nav-tools">
         <button class="search-toggle-btn" id="searchToggle" aria-label="搜尋">
@@ -48,26 +48,15 @@
 
 <section class="page-banner">
   <div class="wrap">
-    <p class="section-eyebrow">ARTICLES</p>
-    <h1>把人生的每一塊，慢慢想清楚</h1>
-    <p>五個主題，陪你把理財、傳承、生活、老後與自我照顧，一件一件想過一遍</p>
+    <p class="section-eyebrow">RESOURCES</p>
+    <h1>實用資源</h1>
+    <p>整理常見的申請流程與文件，需要的時候可以直接查</p>
   </div>
 </section>
 
 <section>
-  <div class="wrap">
-    <div style="max-width:420px; margin: 0 auto var(--space-md);">
-      <input type="text" id="pageSearchInput" placeholder="搜尋文章標題或內文…"
-        style="width:100%; padding:12px 16px; border:1px solid var(--color-line); border-radius:100px; background:var(--color-bg-card); font-family:var(--font-sans); font-size:0.95rem; color:var(--color-brown);">
-    </div>
-    <div class="filter-bar" id="filterBar"></div>
-
-    <div class="article-list" id="articleList"></div>
-
-    <div class="empty-state" id="emptyState" style="display:none;">
-      <span class="icon">🍵</span>
-      <p>還沒有符合的文章，換個關鍵字或分類試試看。</p>
-    </div>
+  <div class="wrap" style="max-width: 720px; margin: 0 auto;">
+    <div id="resourceList"></div>
   </div>
 </section>
 
@@ -121,7 +110,9 @@
 
 <script src="js/main.js"></script>
 <script>
-  loadSiteData().then(initArticlesPage);
+  loadSiteData().then(() => {
+    renderResources("resourceList");
+  });
 </script>
 </body>
 </html>

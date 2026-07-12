@@ -37,8 +37,34 @@ collections:
               - { label: "預估閱讀時間", name: "readTime", widget: "string", required: false, hint: "例如：6 分鐘" }
               - { label: "摘要（顯示在列表卡片上）", name: "excerpt", widget: "text" }
               - { label: "封面圖", name: "cover", widget: "image", required: false }
+              - label: "版型"
+                name: "format"
+                widget: "select"
+                required: false
+                default: "full"
+                hint: "一般文章選「完整版」；限動、短篇故事選「短篇版」"
+                options:
+                  - { label: "完整版（一般文章）", value: "full" }
+                  - { label: "短篇版（限動、短故事）", value: "short" }
               - { label: "內文", name: "content", widget: "markdown" }
               - { label: "還是草稿（先不要正式顯示）", name: "draft", widget: "boolean", required: false, default: false }
+
+  - name: "resources"
+    label: "🧰 實用資源"
+    files:
+      - name: "resources"
+        label: "資源清單"
+        file: "data/resources.json"
+        fields:
+          - label: "資源清單"
+            name: "resources"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - { label: "編號（id）", name: "id", widget: "string" }
+              - { label: "分類標籤", name: "tag", widget: "string", hint: "例如：保險理賠、社會保險、旅遊保險" }
+              - { label: "標題", name: "title", widget: "string" }
+              - { label: "內容", name: "content", widget: "markdown", hint: "可以直接寫 HTML 標籤，例如 <strong>、<a href>" }
 
   - name: "faq"
     label: "❓ 常見問題"
