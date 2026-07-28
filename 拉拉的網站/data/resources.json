@@ -1,0 +1,22 @@
+{
+  "resources": [
+    {
+      "id": "labor-injury-insurance",
+      "tag": "保險理賠",
+      "title": "勞工職業災害保險申請",
+      "content": "<p><strong>出事 10 天內</strong>：申請「職業傷病門診單」，看診當下先扣掉健保部分負擔，當下看診或 10 天內回診，即可向院所申請核退。<br><a href=\"https://www.bli.gov.tw/0106214.html\" target=\"_blank\" rel=\"noopener\">下載申請文件 →</a></p><p><strong>出事 10 天以上</strong>：準備「勞工職業災害保險自墊醫療費用核退申請書及給付收據」，附上診斷證明、收據、存摺影本，記得蓋公司大小章。<br><a href=\"https://www.bli.gov.tw/0106216.html\" target=\"_blank\" rel=\"noopener\">下載申請文件 →</a></p><p><strong>因職災超過 4 天不能工作</strong>：可申請「勞工職業災害保險傷病給付（住院治療期間照護補助）申請書及給付（補助）收據」，休息時間長短要與診斷證明及收據時間相同。<br><a href=\"https://www.bli.gov.tw/0106236.html\" target=\"_blank\" rel=\"noopener\">下載申請文件 →</a></p><p><strong>提醒</strong>：因加保未加保，政府跟公司都要負責，可以跟公司談判。申請期限為 <strong>5 年內</strong>，即便日後換其他單位上班，只要符合理賠資格，仍可請領。</p>"
+    },
+    {
+      "id": "social-insurance-subsidy",
+      "tag": "社會保險",
+      "title": "重大傷病卡與身心障礙手冊",
+      "content": "<p><strong>重大傷病卡</strong>：由醫生評估確定為重大傷病後，院所會協助申請，之後看醫生治療都會有補助。</p><p><strong>身心障礙手冊</strong>：先到區公所拿身障手冊申請表格，再請醫生鑑定，院所送出文件，確定符合資格後由區公所核發手冊並寄到家裡。核發後仍需定期回醫院評估是否符合資格。</p><p>台北市身障生活補助（每月）：重度 9,485 元／中度 5,437 元／輕度 4,049 元。</p><p><strong>民間補助</strong>：如罕見疾病基金會，可依需求申請生活、醫療、心理等補助。流程為加入基金會（可透過官網）、附上診斷證明並寄回、由社工聯繫家屬。<br><a href=\"https://www.tfrd.org.tw/tfrd/service_a\" target=\"_blank\" rel=\"noopener\">前往罕見疾病基金會 →</a></p>"
+    },
+    {
+      "id": "travel-insurance",
+      "tag": "旅遊保險",
+      "title": "旅平險投保與理賠條件",
+      "content": "<p><strong>投保方式</strong>：出發前 30 天內可電話投保；出發前一小時仍可投保。可透過網站「旅遊小管家」、LINE 掃碼、或電話 0809-019-888 轉 2（每日 8-21 點）投保，只有投保成功時才會扣款。<br><a href=\"https://b2c.518fb.com/TravelHouseKeeper/travelCardIntroduce#\" target=\"_blank\" rel=\"noopener\">查看旅平卡資訊 →</a></p><p><strong>出國狀況題</strong></p><p>班機延誤或取消：請航空公司開立延誤證明，務必到櫃檯申請文件。<br>行李摔壞：當下拍照留證，向機場與航空公司求償。<br>行李箱內容物損壞：富邦理賠，需拍照留證。</p><p><strong>理賠條件</strong>：出發前已知悉取消或延誤，則不理賠；但如果到了機場才發現，或看到電子看板顯示延誤，仍會理賠，務必記得去櫃檯申請證明文件。</p>"
+    }
+  ]
+}
